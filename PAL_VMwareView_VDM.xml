@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PAL NAME="VMWare View Connection Server Performance" DESCRIPTION="Display VMWare View Connection Server VM Processor and VM Memory counters, plus VDM stats" VERSION="1.0" CONTENTOWNERS="Josh Townsend" FEEDBACKEMAILADDRESS="josh@vmtoday.com" LANGUAGE="English" LANGUAGECODE="en" PALVERSION="2.0">
+    <ANALYSIS NAME="All Sessions" ENABLED="True" CATEGORY="VMware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\All Sessions" ID="6b036653-f13a-4583-bbc8-a216c1f5802e" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total numberof all View sessions active over the sampling period..]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\All Sessions" COLLECTIONVARNAME="CollectionOfAllSessions" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" TRENDVARNAME="TrendOfAllSessions" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\All Sessions" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\All Sessions" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="All Sessions High" ENABLED="True" CATEGORY="VMware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\All Sessions High" ID="8802d852-f99a-4930-ad3d-713635db79dc" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Running count of the max number of sessions this View Connection Server has served at any one time.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\All Sessions High" COLLECTIONVARNAME="CollectionOfAllSessionsHigh" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" TRENDVARNAME="TrendOfAllSessionsHigh" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\All Sessions High" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\All Sessions High" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Check Out VMs" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\Check Out VMs" ID="7c84dc57-a9f2-40e1-a5f1-4fdf4fcfa196" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Number of View Local Mode Desktops currently checked out for offline use over the sampling period.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\Check Out VMs" COLLECTIONVARNAME="CollectionOfCheckOutVMs" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" TRENDVARNAME="TrendOfCheckOutVMs" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\Check Out VMs" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\Check Out VMs" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Check Out VMs High" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\Check Out VMs High" ID="8c50b90f-203d-457c-b9fd-40517695f177" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Maximum Number of View Local Mode Desktops checked out for offline use at any one time.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\Check Out VMs High" COLLECTIONVARNAME="CollectionOfCheckOutVMsHigh" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" TRENDVARNAME="TrendOfCheckOutVMsHigh" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\Check Out VMs High" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\Check Out VMs High" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Full VM Sessions" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\Full VM Sessions" ID="5e513d12-b671-4c98-b16d-b8400db6b965" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of Full VM sessions in use over the sampling period.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\Full VM Sessions" COLLECTIONVARNAME="CollectionOfFullVMSessions" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" TRENDVARNAME="TrendOfFullVMSessions" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\Full VM Sessions" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\Full VM Sessions" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Full VM Sessions High" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\Full VM Sessions High" ID="f3ce0865-3d37-48d2-b69c-fbdcbec941a2" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Maximum number of Full VM sessions at any one time.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\Full VM Sessions High" COLLECTIONVARNAME="CollectionOfFullVMSessionsHigh" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\Bytes Received" TRENDVARNAME="TrendOfFullVMSessionsHigh" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\Full VM Sessions High" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\Full VM Sessions High" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Linked Clone Sessions" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\Linked Clone Sessions" ID="39756808-3785-4f3a-9a39-51d42cb45035" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of Linked Clone sessions in use over the sampling period.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\Linked Clone Sessions" COLLECTIONVARNAME="CollectionOfLinkedCloneSessions" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\Bytes Sent" TRENDVARNAME="TrendOfLinkedCloneSessions" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\Linked Clone Sessions" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\Linked Clone Sessions" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Linked Clone Sessions High" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\Linked Clone Sessions High" ID="9099dcb0-c923-4bb2-9b14-397e27def561" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Maximum number of Linked Clone sessions at any one time.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\Linked Clone Sessions High" COLLECTIONVARNAME="CollectionOfLinkedCloneSessionsHigh" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\Packets Received" TRENDVARNAME="TrendOfLinkedCloneSessionsHigh" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\Linked Clone Sessions High" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\Linked Clone Sessions High" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Other Sessions" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\Other Sessions" ID="2adfd768-f17d-44c2-bfad-02a10cb0693d" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of other sessions in use over the sampling period, including admin, TS, etc..]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\Other Sessions" COLLECTIONVARNAME="CollectionOfOtherSessions" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\Packets Sent" TRENDVARNAME="TrendOfOtherSessions" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\Other Sessions" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\Other Sessions" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Other Sessions High" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\Other Sessions High" ID="cefd276d-9b6a-4944-80d6-b1cb988ad0f5" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Maximum number of other sessions in use any any one time, including admin, TS, etc..]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\Other Sessions High" COLLECTIONVARNAME="CollectionOfOtherSessionsHigh" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" TRENDVARNAME="TrendOfOtherSessionsHigh" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\Other Sessions High" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\Other Sessions High" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="PCoIP Gateway Sessions" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\PCoIP Gateway Sessions" ID="6b3b13ce-6e65-4068-ae67-f007a269f361" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of PCoIP gateway sessions that are currently open.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\PCoIP Gateway Sessions" COLLECTIONVARNAME="CollectionOfPCoIPGatewaySessions" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\Session Duration Seconds" TRENDVARNAME="TrendOfPCoIPGatewaySessions" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\PCoIP Gateway Sessions" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\PCoIP Gateway Sessions" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="PCoIP Gateway Sessions High" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\PCoIP Gateway Sessions High" ID="1dc5d2e6-8d94-4405-b8e4-e0607baf99e8" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[An incrementing number that represents the total number of PCoIP gateway sessions that have been open at any one time]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\PCoIP Gateway Sessions High" COLLECTIONVARNAME="CollectionOfPCoIPGatewaySessionsHigh" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" TRENDVARNAME="TrendOfPCoIPGatewaySessionsHigh" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\PCoIP Gateway Sessions High" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\PCoIP Gateway Sessions High" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Secure Gateway Sessions" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\Secure Gateway Sessions" ID="e246dd7b-ceac-491c-9542-f989aeaff009" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of Secure Gateway sessions that are currently open.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\Secure Gateway Sessions" COLLECTIONVARNAME="CollectionOfSecureGatewaySessions" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" TRENDVARNAME="TrendOfSecureGatewaySessions" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\Secure Gateway Sessions" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\Secure Gateway Sessions" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Secure Gateway Sessions High" ENABLED="True" CATEGORY="Vmware View Connection Server" PRIMARYDATASOURCE="\VMware VDM\Secure Gateway Sessions High" ID="80541ae6-37f4-402c-9094-5e3f7989b4b7" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[An incrementing number that represents the total number of Secure Gateway sessions that have been open at any one time]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\VMware VDM\Secure Gateway Sessions High" COLLECTIONVARNAME="CollectionOfSecureGatewaySessionsHigh" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" TRENDVARNAME="TrendOfSecureGatewaySessionsHigh" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\VMware VDM\Secure Gateway Sessions High" ISTHRESHOLDSADDED="False" DATASOURCE="\VMware VDM\Secure Gateway Sessions High" CHARTLABELS="instance"/>
+	</ANALYSIS>
+<INHERITANCE FILEPATH="SystemOverview.xml" />
+<INHERITANCE FILEPATH="VMware.xml" />
+</PAL>
