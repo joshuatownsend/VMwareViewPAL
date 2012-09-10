@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PAL NAME="VMWare View PCoIP and Guest Performance Simple No Explain" DESCRIPTION="Display VMWare View guest VM Processor and VM Memory counters, plus PCoIP stats" VERSION="1.0" CONTENTOWNERS="Josh Townsend" FEEDBACKEMAILADDRESS="josh@vmtoday.com" LANGUAGE="English" LANGUAGECODE="en" PALVERSION="2.0">
+    <ANALYSIS NAME="Audio Bytes Received" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" ID="3a771670-7621-44c6-bf15-01f50bdfecb8" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of audio bytes that have been received since the PCoIP session started.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" COLLECTIONVARNAME="CollectionOfAudioBytesReceived" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" TRENDVARNAME="TrendOfAudioBytesReceived" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Audio Bytes Sent" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" ID="311e02f5-985e-4698-9e51-8ad50ee4b586" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of audio bytes that have been sent since the PCoIP session started.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" COLLECTIONVARNAME="CollectionOfAudioBytesSent" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" TRENDVARNAME="TrendOfAudioBytesSent" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Audio RX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" ID="cd99b97b-5590-465c-88ee-2a54af9fdb8a" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Bandwidth for ingoing audio packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" COLLECTIONVARNAME="CollectionOfAudioRXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" TRENDVARNAME="TrendOfAudioRXBWkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Audio TX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" ID="b2886840-7c2d-4f9d-b3b9-8b9872d8fbc5" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Bandwidth for outgoing audio packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" COLLECTIONVARNAME="CollectionOfAudioTXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" TRENDVARNAME="TrendOfAudioTXBWkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Audio TX BW Limit kbit/sec" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" ID="eae1474d-8428-4944-99d0-c96acf427a73" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Transmit bandwidth limit for outgoing audio packets as defined by the GPO setting.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" COLLECTIONVARNAME="CollectionOfAudioTXBWLimitkbit/sec" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" TRENDVARNAME="TrendOfAudioTXBWLimitkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="General PCoIP Bytes Received" ENABLED="True" CATEGORY="PCoIP General" PRIMARYDATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Bytes Received" ID="36f17099-860d-46b5-8ce3-d9bc23e63c08" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of bytes that have been received since the PCoIP session started.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session General Statistics(PCoIP Session)\Bytes Received" COLLECTIONVARNAME="CollectionOfGeneralPCoIPBytesReceived" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\Bytes Received" TRENDVARNAME="TrendOfGeneralPCoIPBytesReceived" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\Bytes Received" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Bytes Received" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="General PCoIP Bytes Sent" ENABLED="True" CATEGORY="PCoIP General" PRIMARYDATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Bytes Sent" ID="d2678c6a-bd6c-469e-8d94-aae6303d1de9" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of bytes that have been transmitted since the PCoIP session started.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session General Statistics(PCoIP Session)\Bytes Sent" COLLECTIONVARNAME="CollectionOfGeneralPCoIPBytesSent" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\Bytes Sent" TRENDVARNAME="TrendOfGeneralPCoIPBytesSent" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\Bytes Sent" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Bytes Sent" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="General PCoIP Packets Received" ENABLED="True" CATEGORY="PCoIP General" PRIMARYDATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Packets Received" ID="18644001-7783-425f-942e-4199962664f8" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of packets that have been received since the PCoIP session started. Note that not all packets are the same size.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session General Statistics(PCoIP Session)\Packets Received" COLLECTIONVARNAME="CollectionOfGeneralPCoIPPacketsReceived" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\Packets Received" TRENDVARNAME="TrendOfGeneralPCoIPPacketsReceived" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\Packets Received" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Packets Received" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="General PCoIP Packets Sent" ENABLED="True" CATEGORY="PCoIP General" PRIMARYDATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Packets Sent" ID="e3cbf065-a38b-45d4-9f77-6d74b96fdd60" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of packets that have been transmitted since the PCoIP session started. Note that not all packets are the same size.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session General Statistics(PCoIP Session)\Packets Sent" COLLECTIONVARNAME="CollectionOfGeneralPCoIPPacketsSent" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\Packets Sent" TRENDVARNAME="TrendOfGeneralPCoIPPacketsSent" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\Packets Sent" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Packets Sent" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="General PCoIP RX Packets Lost" ENABLED="True" CATEGORY="PCoIP General" PRIMARYDATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" ID="d923aa66-b201-439c-a50a-8d1aa68d6a97" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of receive packets that have been lost since the PCoIP session started.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" COLLECTIONVARNAME="CollectionOfGeneralPCoIPRXPacketsLost" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" TRENDVARNAME="TrendOfGeneralPCoIPRXPacketsLost" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="General PCoIP Session Duration Seconds" ENABLED="True" CATEGORY="PCoIP General" PRIMARYDATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Session Duration Seconds" ID="1e8c383f-7669-4114-85fd-3740cd87e410" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[An incrementing number that represents the total number of seconds the PCoIP session has been open.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session General Statistics(PCoIP Session)\Session Duration Seconds" COLLECTIONVARNAME="CollectionOfGeneralPCoIPSessionDurationSeconds" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\Session Duration Seconds" TRENDVARNAME="TrendOfGeneralPCoIPSessionDurationSeconds" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\Session Duration Seconds" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Session Duration Seconds" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="General PCoIP TX Packets Lost" ENABLED="True" CATEGORY="PCoIP General" PRIMARYDATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" ID="0bedeb74-17bc-402f-a612-27c3549ac76e" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of transmit packets that have been lost since the PCoIP session started.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" COLLECTIONVARNAME="CollectionOfGeneralPCoIPTXPacketsLost" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" TRENDVARNAME="TrendOfGeneralPCoIPTXPacketsLost" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Imaging Active Minimum Quality" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" ID="c0e123c4-5572-4c3d-9b8f-db83a551a709" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[The lowest encoded quality (0 to 100), updated every second. Not to be confused with the GPO setting.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" COLLECTIONVARNAME="CollectionOfImagingActiveMinimumQuality" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" TRENDVARNAME="TrendOfImagingActiveMinimumQuality" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Imaging Bytes Received" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" ID="9f989f53-c9fb-4bdd-a491-a3dc14de2fd4" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of imaging bytes that have been received since the PCoIP session started.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" COLLECTIONVARNAME="CollectionOfImagingBytesReceived" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" TRENDVARNAME="TrendOfImagingBytesReceived" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Imaging Bytes Sent" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Sent" ID="f0745301-c751-4a62-adac-be94c90875a8" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of imaging bytes that have been sent since the PCoIP session started.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Sent" COLLECTIONVARNAME="CollectionOfImagingBytesSent" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Sent" TRENDVARNAME="TrendOfImagingBytesSent" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Sent" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Sent" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Imaging Decoder Capability kbit/sec" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Decoder Capability kbit/sec" ID="d1be14d3-0f60-4d50-ba90-dbec117c3f3f" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[The current estimate of the decoder processing capability.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Decoder Capability kbit/sec" COLLECTIONVARNAME="CollectionOfImagingDecoderCapabilitykbit/sec" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Decoder Capability kbit/sec" TRENDVARNAME="TrendOfImagingDecoderCapabilitykbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Decoder Capability kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Decoder Capability kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Imaging Encoded Frames/sec" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Encoded Frames/sec" ID="971a1679-0eb8-43d4-aa52-9d2a63cdb673" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[The number of imaging frames which were encoded over a one second sampling period.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Encoded Frames/sec" COLLECTIONVARNAME="CollectionOfImagingEncodedFrames/sec" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Encoded Frames/sec" TRENDVARNAME="TrendOfImagingEncodedFrames/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Encoded Frames/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Encoded Frames/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Imaging RX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging RX BW kbit/sec" ID="2e1df338-8223-405d-91f3-21d1353de91a" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Bandwidth for incoming imaging packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging RX BW kbit/sec" COLLECTIONVARNAME="CollectionOfImagingRXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging RX BW kbit/sec" TRENDVARNAME="TrendOfImagingRXBWkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging RX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging RX BW kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Imaging TX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging TX BW kbit/sec" ID="47a71b6e-a3be-4ac6-aaaa-3b1450d7f405" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Bandwidth for outgoing imaging packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging TX BW kbit/sec" COLLECTIONVARNAME="CollectionOfImagingTXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging TX BW kbit/sec" TRENDVARNAME="TrendOfImagingTXBWkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging TX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging TX BW kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Network Round Trip Latency ms" ENABLED="True" CATEGORY="PCoIP Network" PRIMARYDATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\Round Trip Latency ms" ID="2661afae-acc5-4c56-9023-ab9ad26bf98c" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Round trip latency (in milliseconds) between server and client.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Network Statistics(PCoIP Session)\Round Trip Latency ms" COLLECTIONVARNAME="CollectionOfNetworkRoundTripLatencyms" EXPRESSIONPATH="\PCoIP Session Network Statistics(PCoIP Session)\Round Trip Latency ms" TRENDVARNAME="TrendOfNetworkRoundTripLatencyms" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Network Statistics(PCoIP Session)\Round Trip Latency ms" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\Round Trip Latency ms" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Network RX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP Network" PRIMARYDATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\RX BW kbit/sec" ID="24d3dd59-8e41-473e-8493-074ee0141dcf" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Overall bandwidth for incoming PCoIP packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Network Statistics(PCoIP Session)\RX BW kbit/sec" COLLECTIONVARNAME="CollectionOfNetworkRXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session Network Statistics(PCoIP Session)\RX BW kbit/sec" TRENDVARNAME="TrendOfNetworkRXBWkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Network Statistics(PCoIP Session)\RX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\RX BW kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Network RX BW Peak kbit/sec" ENABLED="True" CATEGORY="PCoIP Network" PRIMARYDATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\RX BW Peak kbit/sec" ID="33adc684-3226-489c-9c8e-b969a384b8e2" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Peak bandwidth for incoming PCoIP packets within a one second sampling period.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Network Statistics(PCoIP Session)\RX BW Peak kbit/sec" COLLECTIONVARNAME="CollectionOfNetworkRXBWPeakkbit/sec" EXPRESSIONPATH="\PCoIP Session Network Statistics(PCoIP Session)\RX BW Peak kbit/sec" TRENDVARNAME="TrendOfNetworkRXBWPeakkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Network Statistics(PCoIP Session)\RX BW Peak kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\RX BW Peak kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Network RX Packet Loss %" ENABLED="True" CATEGORY="PCoIP Network" PRIMARYDATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\RX Packet Loss %" ID="53776742-a681-49a7-a12e-dd4c7321ae53" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Percentage of received packets lost during a sampling period.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Network Statistics(PCoIP Session)\RX Packet Loss %" COLLECTIONVARNAME="CollectionOfNetworkRXPacketLoss%" EXPRESSIONPATH="\PCoIP Session Network Statistics(PCoIP Session)\RX Packet Loss %" TRENDVARNAME="TrendOfNetworkRXPacketLoss%" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Network Statistics(PCoIP Session)\RX Packet Loss %" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\RX Packet Loss %" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Network TX BW Active Limit kbit/sec" ENABLED="True" CATEGORY="PCoIP Network" PRIMARYDATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\TX BW Active Limit kbit/sec" ID="2fafcc77-f429-4829-9e5a-7b1efd3d5851" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[The current estimate of the available network bandwidth, updated every second.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Network Statistics(PCoIP Session)\TX BW Active Limit kbit/sec" COLLECTIONVARNAME="CollectionOfNetworkTXBWActiveLimitkbit/sec" EXPRESSIONPATH="\PCoIP Session Network Statistics(PCoIP Session)\TX BW Active Limit kbit/sec" TRENDVARNAME="TrendOfNetworkTXBWActiveLimitkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Network Statistics(PCoIP Session)\TX BW Active Limit kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\TX BW Active Limit kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Network TX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP Network" PRIMARYDATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\TX BW kbit/sec" ID="156ea75d-d0e7-49bc-bd00-470feb73662a" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Overall bandwidth for outgoing PCoIP packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Network Statistics(PCoIP Session)\TX BW kbit/sec" COLLECTIONVARNAME="CollectionOfNetworkTXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session Network Statistics(PCoIP Session)\TX BW kbit/sec" TRENDVARNAME="TrendOfNetworkTXBWkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Network Statistics(PCoIP Session)\TX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\TX BW kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Network TX BW Limit kbit/sec" ENABLED="True" CATEGORY="PCoIP Network" PRIMARYDATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\TX BW Limit kbit/sec" ID="ff981694-9818-435c-b7f0-2f42365791c4" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Transmit bandwidth limit for outgoing packets as defined by the minimum of: GPO setting on client and server, local network connection, and Zero Client firmware negotiated value based on encryption limits]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Network Statistics(PCoIP Session)\TX BW Limit kbit/sec" COLLECTIONVARNAME="CollectionOfNetworkTXBWLimitkbit/sec" EXPRESSIONPATH="\PCoIP Session Network Statistics(PCoIP Session)\TX BW Limit kbit/sec" TRENDVARNAME="TrendOfNetworkTXBWLimitkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Network Statistics(PCoIP Session)\TX BW Limit kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\TX BW Limit kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="Network TX Packet Loss %" ENABLED="True" CATEGORY="PCoIP Network" PRIMARYDATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\TX Packet Loss %" ID="81ae43a0-f64e-4ca0-a3e3-348ccb8cba1f" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Percentage of transmitted packets lost during a sampling period.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Network Statistics(PCoIP Session)\TX Packet Loss %" COLLECTIONVARNAME="CollectionOfNetworkTXPacketLoss%" EXPRESSIONPATH="\PCoIP Session Network Statistics(PCoIP Session)\TX Packet Loss %" TRENDVARNAME="TrendOfNetworkTXPacketLoss%" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session Network Statistics(PCoIP Session)\TX Packet Loss %" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\TX Packet Loss %" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="USB Bytes Received" ENABLED="True" CATEGORY="PCoIP USB" PRIMARYDATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Received" ID="4b1fa017-26c1-427a-a333-9bd44cb1e6da" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of USB bytes that have been received since the PCoIP session started.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Received" COLLECTIONVARNAME="CollectionOfUSBBytesReceived" EXPRESSIONPATH="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Received" TRENDVARNAME="TrendOfUSBBytesReceived" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Received" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Received" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="USB Bytes Sent" ENABLED="True" CATEGORY="PCoIP USB" PRIMARYDATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Sent" ID="3b3ef11e-304d-45a1-bced-53f437dfffc5" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Total number of USB bytes that have been sent since the PCoIP session started.]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Sent" COLLECTIONVARNAME="CollectionOfUSBBytesSent" EXPRESSIONPATH="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Sent" TRENDVARNAME="TrendOfUSBBytesSent" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Sent" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Sent" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="USB RX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP USB" PRIMARYDATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB RX BW kbit/sec" ID="9ddcdc52-8535-422e-8a19-fd79adc5def1" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Bandwidth for incoming USB packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session USB Statistics(PCoIP Session)\USB RX BW kbit/sec" COLLECTIONVARNAME="CollectionOfUSBRXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session USB Statistics(PCoIP Session)\USB RX BW kbit/sec" TRENDVARNAME="TrendOfUSBRXBWkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session USB Statistics(PCoIP Session)\USB RX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB RX BW kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+	<ANALYSIS NAME="USB TX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP USB" PRIMARYDATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB TX BW kbit/sec" ID="3dcc0e0d-13c9-47ef-8529-99957af925ee" FROMALLCOUNTERSTATS="False">
+		<DESCRIPTION><![CDATA[Bandwidth for outgoing USB packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session USB Statistics(PCoIP Session)\USB TX BW kbit/sec" COLLECTIONVARNAME="CollectionOfUSBTXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session USB Statistics(PCoIP Session)\USB TX BW kbit/sec" TRENDVARNAME="TrendOfUSBTXBWkbit/sec" DATATYPE="integer"/>
+		<CHART CHARTTITLE="\PCoIP Session USB Statistics(PCoIP Session)\USB TX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB TX BW kbit/sec" CHARTLABELS="instance"/>
+	</ANALYSIS>
+<INHERITANCE FILEPATH="SystemOverview.xml" />
+<INHERITANCE FILEPATH="VMware.xml" />
+</PAL>
