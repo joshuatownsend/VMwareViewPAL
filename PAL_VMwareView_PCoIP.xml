@@ -110,17 +110,16 @@
 		<li>Change the power policy of VMware View pools to suspend or power-off to conserve host resources.  Note: this is at the expense of increased logon times for users.
 		<li>Add additional hosts to cluster.  Note configuration maximums of 8 hosts per cluster in older versions of vSphere and View when using VMFS-based Linked Clones.
 		<li>Reduce the amount of memory given to View desktops.  Review the Memory Active in MB counter (above).  If memory active is substantially below configured memory, reduce the amount of memory given to desktops.  Recommended starting values are 2GB for XP, 2GB for Win7 x86 and 3GB for Win7 x64.
-		</ul>
-		]]></DESCRIPTION>
+		</ul>]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\VM Memory\Memory Swapped in MB" COLLECTIONVARNAME="CollectionOfVMMemoryMemorySwappedinMB" EXPRESSIONPATH="\VM Memory\Memory Swapped in MB" TRENDVARNAME="TrendVMMemoryMemorySwappedinMB" DATATYPE="integer" />
 		<CHART CHARTTITLE="\VM Memory\Memory Swapped in MB" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Memory\Memory Swapped in MB" CHARTLABELS="instance" />
 	</ANALYSIS>
 	<ANALYSIS NAME="Memory Used in MB" ENABLED="True" CATEGORY="VM Memory" PRIMARYDATASOURCE="\VM Memory\Memory Used in MB" ID="d0c4963f-5ae1-4640-a20c-81fe80f20bed" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[The estimated amount of physical host memory currently consumed for this virtual machine's physical memory. This is the same as (Memory Mapped in MB) - (Memory Shared Saved in MB).]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[The estimated amount of physical host memory currently consumed for this virtual machine's physical memory. This is the same as 'Memory Mapped in MB' - 'Memory Shared Saved in MB'.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\VM Memory\Memory Used in MB" COLLECTIONVARNAME="CollectionOfVMMemoryMemoryUsedinMB" EXPRESSIONPATH="\VM Memory\Memory Used in MB" TRENDVARNAME="TrendVMMemoryMemoryUsedinMB" DATATYPE="integer" />
 		<CHART CHARTTITLE="\VM Memory\Memory Used in MB" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Memory\Memory Used in MB" CHARTLABELS="instance" />
 	</ANALYSIS>
-	<ANALYSIS NAME="Limit in MHz" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor\Limit in MHz" ID="0177e245-1868-44c0-9030-fa0f3884f557" FROMALLCOUNTERSTATS="False">
+	<ANALYSIS NAME="Limit in MHz" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor(*)\Limit in MHz" ID="0177e245-1868-44c0-9030-fa0f3884f557" FROMALLCOUNTERSTATS="False">
 		<DESCRIPTION><![CDATA[The maximum processing power in MHz allowed to the virtual machine. Assigning a CPU Limit ensures that this virtual machine never consumes more than a certain amount of the available processor power. By limiting the amount of processing power consumed, a portion of the processing power becomes available to other virtual machines.<br>
 		<br>
 		From VMware KB <a href"http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1033115">1033115</a>: When a CPU Limit is set on a virtual machine resource settings, the virtual machine is deliberately held from being scheduled to a PCPU when it has used up its allocated CPU resource. This happens regardless of the CPU utilization. If the limit is set to 500MHz, the virtual machine is descheduled from the PCPU and has to wait before it is allowed to be scheduled again. As such, the virtual machine might experience performance degradation.<br>
@@ -132,19 +131,19 @@
 		<br>
 		If the value shown here is less than the 'Host Processor Speed in MHz' value, you are limited.  The default for VM's is 'unlimited', which should appear as some unwieldy number in the range of terahertz or petahertz (not that your servers can do this).
 		]]></DESCRIPTION>
-		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor\Limit in MHz" COLLECTIONVARNAME="CollectionOfVMProcessorLimitinMHz" EXPRESSIONPATH="\VM Processor\Limit in MHz" TRENDVARNAME="TrendVMProcessorLimitinMHz" DATATYPE="integer" />
-		<CHART CHARTTITLE="\VM Processor\Limit in MHz" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor\Limit in MHz" CHARTLABELS="instance" />
+		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor(*)\Limit in MHz" COLLECTIONVARNAME="CollectionOfVMProcessorLimitinMHz" EXPRESSIONPATH="\VM Processor(*)\Limit in MHz" TRENDVARNAME="TrendVMProcessorLimitinMHz" DATATYPE="integer" />
+		<CHART CHARTTITLE="\VM Processor(*)\Limit in MHz" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor(*)\Limit in MHz" CHARTLABELS="instance" />
 	</ANALYSIS>
-	<ANALYSIS NAME="Reservation in MHz" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor\Reservation in MHz" ID="d3cf6a34-303d-49e6-aa31-9471a96af18b" FROMALLCOUNTERSTATS="False">
+	<ANALYSIS NAME="Reservation in MHz" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor(*)\Reservation in MHz" ID="d3cf6a34-303d-49e6-aa31-9471a96af18b" FROMALLCOUNTERSTATS="False">
 		<DESCRIPTION><![CDATA[The minimum processing power in MHz available to the virtual machine. Assigning a CPU Reservation ensures that even as other virtual machines on the same host consume shared processing power, there is still a certain minimum amount for this virtual machine.<br>
 		<br>
 		See <a href="http://www.yellow-bricks.com/2010/07/08/reservations-primer/">http://www.yellow-bricks.com/2010/07/08/reservations-primer/</a> and <a href="http://frankdenneman.nl/2010/06/reservations-and-cpu-scheduling/">http://frankdenneman.nl/2010/06/reservations-and-cpu-scheduling/</a>for more info on reservations.<br>
 		<br>
 		In general, you should not be setting a reservation for Veiw desktops.  There may be some unique use cases for reserving CPU for high-profile users' desktops (CEO, CTO, your own admin console) in View.  Do this sparingly, as reservations can limit the ESXi scheduler and make your virtual datacenter inefficient.  CPU Reservations can introduce higher CPU ready for VM's without reservations.  Reservations may not solve CPU Ready issues for the VM's they are set on either (<a href="http://joshodgers.com/2012/07/22/common-mistake-using-cpu-reservations-to-solve-cpu-ready/">http://joshodgers.com/2012/07/22/common-mistake-using-cpu-reservations-to-solve-cpu-ready/</a>]]></DESCRIPTION>
-		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor\Reservation in MHz" COLLECTIONVARNAME="CollectionOfVMProcessorReservationinMHz" EXPRESSIONPATH="\VM Processor\Reservation in MHz" TRENDVARNAME="TrendVMProcessorReservationinMHz" DATATYPE="integer" />
-		<CHART CHARTTITLE="\VM Processor\Reservation in MHz" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor\Reservation in MHz" CHARTLABELS="instance" />
+		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor(*)\Reservation in MHz" COLLECTIONVARNAME="CollectionOfVMProcessorReservationinMHz" EXPRESSIONPATH="\VM Processor(*)\Reservation in MHz" TRENDVARNAME="TrendVMProcessorReservationinMHz" DATATYPE="integer" />
+		<CHART CHARTTITLE="\VM Processor(*)\Reservation in MHz" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor(*)\Reservation in MHz" CHARTLABELS="instance" />
 	</ANALYSIS>
-	<ANALYSIS NAME="Shares" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor\Shares" ID="fb2bcdfb-35fa-4dda-bb74-1e068b1a332d" FROMALLCOUNTERSTATS="False">
+	<ANALYSIS NAME="Shares" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor(*)\Shares" ID="fb2bcdfb-35fa-4dda-bb74-1e068b1a332d" FROMALLCOUNTERSTATS="False">
 		<DESCRIPTION><![CDATA[The number of CPU shares allocated to the virtual machine.<br>
 		<br>
 		Each virtual machine is granted a number of CPU shares. The more shares a virtual machine has, the more often it gets a time slice of a CPU when there is no CPU idle time. Shares represent a relative metric for allocating CPU capacity.<br>
@@ -155,36 +154,39 @@
 		<br>
 		If this value is variable (not a flat line), this may indicate that your VM is in a resource pool configured with a set number of shares.  As your View environment dynamically spins up and down VM's within the pool, the percentage of shares for a particular machine will vary.  Understand the impact of shares, reservations and limits on VMs and Resource Pools!!!!
 		]]></DESCRIPTION>
-		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor\Shares" COLLECTIONVARNAME="CollectionOfVMProcessorShares" EXPRESSIONPATH="\VM Processor\Shares" TRENDVARNAME="TrendVMProcessorShares" DATATYPE="integer" />
-		<CHART CHARTTITLE="\VM Processor\Shares" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor\Shares" CHARTLABELS="instance" />
+		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor(*)\Shares" COLLECTIONVARNAME="CollectionOfVMProcessorShares" EXPRESSIONPATH="\VM Processor(*)\Shares" TRENDVARNAME="TrendVMProcessorShares" DATATYPE="integer" />
+		<CHART CHARTTITLE="\VM Processor(*)\Shares" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor(*)\Shares" CHARTLABELS="instance" />
 	</ANALYSIS>
-	<ANALYSIS NAME="CPU stolen time" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor\CPU stolen time" ID="73a2331a-269d-4703-800f-4cbde00c2bab" FROMALLCOUNTERSTATS="False">
-		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor\CPU stolen time" COLLECTIONVARNAME="CollectionOfVMProcessorCPUstolentime" EXPRESSIONPATH="\VM Processor\CPU stolen time" TRENDVARNAME="TrendVMProcessorCPUstolentime" DATATYPE="integer" />
-		<CHART CHARTTITLE="\VM Processor\CPU stolen time" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor\CPU stolen time" CHARTLABELS="instance" />
+	<ANALYSIS NAME="CPU stolen time" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor(*)\CPU stolen time" ID="73a2331a-269d-4703-800f-4cbde00c2bab" FROMALLCOUNTERSTATS="False">
+		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor(*)\CPU stolen time" COLLECTIONVARNAME="CollectionOfVMProcessorCPUstolentime" EXPRESSIONPATH="\VM Processor(*)\CPU stolen time" TRENDVARNAME="TrendVMProcessorCPUstolentime" DATATYPE="integer" />
+		<CHART CHARTTITLE="\VM Processor(*)\CPU stolen time" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor(*)\CPU stolen time" CHARTLABELS="instance" />
 		<DESCRIPTION><![CDATA[The time (in ms) that the VM was runnable but not scheduled to run.<br>
 		<br>
-		<b>This is CPU Ready</b>
+		<b>This is CPU Ready!!!</b><br>
 		<br>
 		For more on CPU Ready see: <a href="http://vmtoday.com/2010/08/high-cpu-ready-poor-performance/">http://vmtoday.com/2010/08/high-cpu-ready-poor-performance/</a><br>
 		<br>
-		CPU Ready is often a sign of over subscribing CPU resources or over-sizing your virtual machines.  This counter shows CPU Ready time in <b>miliseconds</b>.  Translate this into something a bit easier to use, divide the 
-		See the vSphere Performance Monitoring Guide here: <a href="http://pubs.vmware.com/vsphere-50/topic/com.vmware.ICbase/PDF/vsphere-esxi-vcenter-server-50-monitoring-performance-guide.pdf">http://pubs.vmware.com/vsphere-50/topic/com.vmware.ICbase/PDF/vsphere-esxi-vcenter-server-50-monitoring-performance-guide.pdf</a>
+		CPU Ready is often a sign of over subscribing CPU resources or over-sizing your virtual machines.  This counter shows CPU Ready time as a percentage per <b>milisecond</b> that the CPU was ready to run but could not be scheduled by the ESXi Scheduler.  Multiply by 100 to get percentage of CPU Ready.  In general, anything above 10% CPU Ready will result in poor performance. <br>
+		For more on Scheduling/Time Keeping in VM's see: <a href="http://www.vmware.com/files/pdf/Timekeeping-In-VirtualMachines.pdf">http://www.vmware.com/files/pdf/Timekeeping-In-VirtualMachines.pdf</a>.  Also see the vSphere Performance Monitoring Guide here: <a href="http://pubs.vmware.com/vsphere-50/topic/com.vmware.ICbase/PDF/vsphere-esxi-vcenter-server-50-monitoring-performance-guide.pdf">http://pubs.vmware.com/vsphere-50/topic/com.vmware.ICbase/PDF/vsphere-esxi-vcenter-server-50-monitoring-performance-guide.pdf</a><br>
+		<br>
+		If this counter is in a warning or critical state, check CPU Ready for the host that this VM is running on in vCenter.  The value in the realtime graph is a summation of miliseconds VM's were ready but could not be scheduled.  Divide the value shown in the vCenter ESXi Performance tab by the number of milisecond timeslices in the graph (realtime graph = 20 second refresh = 20000 slices).  Example: If CPU ready is 5200 on the CPU/RealTime graph, divide 5200/20000 = .26 x 100 = 26% CPU RDY.  Also check ESXTOP on the ESXi host that this VM is running on.  If multiple VM's show high CPU ready, you are over-provisioning VM's with too many vCPU's or have too high of a consolidation ration (too many VM's per host).  Remove vCPU's or add additional pCPU's or hosts.<br>
+		
 		]]></DESCRIPTION>
 	</ANALYSIS>
-	<ANALYSIS NAME="% Processor Time" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor\% Processor Time" ID="772fa005-25f7-4b62-8b9d-a66091b5f15f" FROMALLCOUNTERSTATS="False">
+	<ANALYSIS NAME="% Processor Time" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor(*)\% Processor Time" ID="772fa005-25f7-4b62-8b9d-a66091b5f15f" FROMALLCOUNTERSTATS="False">
 		<DESCRIPTION><![CDATA[Current load of the VM's virtual processor.]]></DESCRIPTION>
-		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor\% Processor Time" COLLECTIONVARNAME="CollectionOfVMProcessorPercentProcessorTime" EXPRESSIONPATH="\VM Processor\% Processor Time" TRENDVARNAME="TrendVMProcessorPercentProcessorTime" DATATYPE="integer" />
-		<CHART CHARTTITLE="\VM Processor\% Processor Time" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor\% Processor Time" CHARTLABELS="instance" />
+		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor(*)\% Processor Time" COLLECTIONVARNAME="CollectionOfVMProcessorPercentProcessorTime" EXPRESSIONPATH="\VM Processor(*)\% Processor Time" TRENDVARNAME="TrendVMProcessorPercentProcessorTime" DATATYPE="integer" />
+		<CHART CHARTTITLE="\VM Processor(*)\% Processor Time" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor(*)\% Processor Time" CHARTLABELS="instance" />
 	</ANALYSIS>
-	<ANALYSIS NAME="Effective VM Speed in MHz" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor\Effective VM Speed in MHz" ID="dab0158b-6deb-4623-aeda-159d6acdb8e5" FROMALLCOUNTERSTATS="False">
+	<ANALYSIS NAME="Effective VM Speed in MHz" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor(*)\Effective VM Speed in MHz" ID="dab0158b-6deb-4623-aeda-159d6acdb8e5" FROMALLCOUNTERSTATS="False">
 		<DESCRIPTION><![CDATA[The approximate average effective speed of the VM's virtual CPU over the time period between the two samples.]]></DESCRIPTION>
-		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor\Effective VM Speed in MHz" COLLECTIONVARNAME="CollectionOfVMProcessorEffectiveVMSpeedinMHz" EXPRESSIONPATH="\VM Processor\Effective VM Speed in MHz" TRENDVARNAME="TrendVMProcessorEffectiveVMSpeedinMHz" DATATYPE="integer" />
-		<CHART CHARTTITLE="\VM Processor\Effective VM Speed in MHz" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor\Effective VM Speed in MHz" CHARTLABELS="instance" />
+		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor(*)\Effective VM Speed in MHz" COLLECTIONVARNAME="CollectionOfVMProcessorEffectiveVMSpeedinMHz" EXPRESSIONPATH="\VM Processor(*)\Effective VM Speed in MHz" TRENDVARNAME="TrendVMProcessorEffectiveVMSpeedinMHz" DATATYPE="integer" />
+		<CHART CHARTTITLE="\VM Processor(*)\Effective VM Speed in MHz" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor(*)\Effective VM Speed in MHz" CHARTLABELS="instance" />
 	</ANALYSIS>
-	<ANALYSIS NAME="Host processor speed in MHz" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor\Host processor speed in MHz" ID="c1f66654-e0f0-4d0c-973a-29f30bba0c66" FROMALLCOUNTERSTATS="False">
+	<ANALYSIS NAME="Host processor speed in MHz" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor(*)\Host processor speed in MHz" ID="c1f66654-e0f0-4d0c-973a-29f30bba0c66" FROMALLCOUNTERSTATS="False">
 		<DESCRIPTION><![CDATA[Host Processor speed.]]></DESCRIPTION>
-		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor\Host processor speed in MHz" COLLECTIONVARNAME="CollectionOfVMProcessorHostprocessorspeedinMHz" EXPRESSIONPATH="\VM Processor\Host processor speed in MHz" TRENDVARNAME="TrendVMProcessorHostprocessorspeedinMHz" DATATYPE="integer" />
-		<CHART CHARTTITLE="\VM Processor\Host processor speed in MHz" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor\Host processor speed in MHz" CHARTLABELS="instance" />
+		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor(*)\Host processor speed in MHz" COLLECTIONVARNAME="CollectionOfVMProcessorHostprocessorspeedinMHz" EXPRESSIONPATH="\VM Processor(*)\Host processor speed in MHz" TRENDVARNAME="TrendVMProcessorHostprocessorspeedinMHz" DATATYPE="integer" />
+		<CHART CHARTTITLE="\VM Processor(*)\Host processor speed in MHz" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor(*)\Host processor speed in MHz" CHARTLABELS="instance" />
 	</ANALYSIS>
 	<ANALYSIS NAME="Audio Bytes Received" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" ID="1c2de0da-9b2c-41ca-b974-5e8f4ef936dc" FROMALLCOUNTERSTATS="False">
 		<DESCRIPTION><![CDATA[Total number of audio bytes that have been received since the PCoIP session started.]]></DESCRIPTION>
