@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PAL NAME="VMWare View PCoIP and Guest Performance" DESCRIPTION="Display VMWare View guest VM Processor and VM Memory counters, plus PCoIP stats.  Note that these counters may not be 100% accurate - see http://vpivot.com/2010/02/10/inaccuracy-of-in-guest-performance-counters/ for more info.  Also monitor esxtop data from ESXi servers and View Connection server and Security Server performance to fully understand disagnostic performance of View environment." VERSION="1.0" CONTENTOWNERS="Josh Townsend" FEEDBACKEMAILADDRESS="josh@vmtoday.com" LANGUAGE="English" LANGUAGECODE="en" PALVERSION="2.0">
-<QUESTION DATATYPE="integer" DEFAULTVALUE="1" QUESTIONVARNAME="NumberOfVirtualCPUs">How many virtual CPU's does the View desktop have assigned?</QUESTION>
-<QUESTION DATATYPE="integer" DEFAULTVALUE="2" QUESTIONVARNAME="vRAMSize">How much RAM in GB does the View desktop have assigned?</QUESTION>
-<QUESTION DATATYPE="integer" DEFAULTVALUE="1" QUESTIONVARNAME="NumberOfVirtualCPUs">How many virtual CPU's does the View desktop have assigned?</QUESTION>
+<QUESTION DATATYPE="integer" DEFAULTVALUE="1" QUESTIONVARNAME="NumberOfVirtualCPUs">How many virtual CPU's does the View desktop have assigned?  Enter same value when asked 'How many processors (physical and virtual) does the server have?'</QUESTION>
+<QUESTION DATATYPE="integer" DEFAULTVALUE="2" QUESTIONVARNAME="vRAMSize">How much RAM in GB does the View desktop have assigned?  Enter same value when asked 'How much memory did the server have in gigabytes?'</QUESTION>
 <QUESTION DATATYPE="boolean" DEFAULTVALUE="False" QUESTIONVARNAME="ViewParentSixtyFourBit">Was the computer 64-bit?</QUESTION>
 <QUESTION DATATYPE="boolean" DEFAULTVALUE="True" QUESTIONVARNAME="LinnkedClone">Was the desktop a Linked Clone</QUESTION>
 	<ANALYSIS NAME="Memory Active in MB" ENABLED="True" CATEGORY="VM Memory" PRIMARYDATASOURCE="\VM Memory\Memory Active in MB" ID="eee6c87f-f8a9-4828-b31d-c40c1f2aa1db" FROMALLCOUNTERSTATS="False">
@@ -10,7 +9,7 @@
 		A large delta between memory active and vRAM allocated could indicate over-sized VM's.  Consider reducing memory allocation to VM's and monitor.
 		<b>See http://www.vmware.com/files/pdf/perf-vsphere-memory_management.pdf for information on how VMware manages memory!!!</b>]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\VM Memory\Memory Active in MB" COLLECTIONVARNAME="CollectionOfVMMemoryMemoryActiveinMB" EXPRESSIONPATH="\VM Memory\Memory Active in MB" TRENDVARNAME="TrendVMMemoryMemoryActiveinMB" DATATYPE="integer" />
-		<CHART CHARTTITLE="\VM Memory\Memory Active in MB" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Memory\Memory Active in MB" CHARTLABELS="instance" />
+		<CHART CHARTTITLE="\VM Memory\Memory Active in MB" ISTHRESHOLDSADDED="True" DATASOURCE="\VM Memory\Memory Active in MB" CHARTLABELS="instance" />
 	</ANALYSIS>
 	<ANALYSIS NAME="Memory Ballooned in MB" ENABLED="True" CATEGORY="VM Memory" PRIMARYDATASOURCE="\VM Memory\Memory Ballooned in MB" ID="0d0e9edc-06b4-4212-b024-f94ca285dbde" FROMALLCOUNTERSTATS="False">
 		<DESCRIPTION><![CDATA[The amount of memory that has been reclaimed from this virtual machine via the VMware Memory Balloon mechanism.<br>
@@ -174,42 +173,68 @@
 		]]></DESCRIPTION>
 	</ANALYSIS>
 	<ANALYSIS NAME="% Processor Time" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor(*)\% Processor Time" ID="772fa005-25f7-4b62-8b9d-a66091b5f15f" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Current load of the VM's virtual processor.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Current load of the VM's virtual processor(s).<br>
+		<br>
+		This is the amount of time that the CPU is active.  If the VM is using vSMP, this is the aggregate average of all CPU's in the VM.<br>
+		<br>
+		If this value is regularly over 70%, you may benefit from adding an additional vCPU.  Be aware, however, that an additional CPU multiplied over all VM's may drive CPU Ready upwards, negatively impacting performance.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor(*)\% Processor Time" COLLECTIONVARNAME="CollectionOfVMProcessorPercentProcessorTime" EXPRESSIONPATH="\VM Processor(*)\% Processor Time" TRENDVARNAME="TrendVMProcessorPercentProcessorTime" DATATYPE="integer" />
 		<CHART CHARTTITLE="\VM Processor(*)\% Processor Time" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor(*)\% Processor Time" CHARTLABELS="instance" />
 	</ANALYSIS>
 	<ANALYSIS NAME="Effective VM Speed in MHz" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor(*)\Effective VM Speed in MHz" ID="dab0158b-6deb-4623-aeda-159d6acdb8e5" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[The approximate average effective speed of the VM's virtual CPU over the time period between the two samples.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[The <b>approximate<b> average effective speed of the VM's virtual CPU over the time period between the two samples.<br>
+		<br>
+		Remember, A VM's vCPU cannot go any faster than the speed of a single core/thread of the physical CPU that's backing it.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor(*)\Effective VM Speed in MHz" COLLECTIONVARNAME="CollectionOfVMProcessorEffectiveVMSpeedinMHz" EXPRESSIONPATH="\VM Processor(*)\Effective VM Speed in MHz" TRENDVARNAME="TrendVMProcessorEffectiveVMSpeedinMHz" DATATYPE="integer" />
 		<CHART CHARTTITLE="\VM Processor(*)\Effective VM Speed in MHz" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor(*)\Effective VM Speed in MHz" CHARTLABELS="instance" />
 	</ANALYSIS>
 	<ANALYSIS NAME="Host processor speed in MHz" ENABLED="True" CATEGORY="VM Processor" PRIMARYDATASOURCE="\VM Processor(*)\Host processor speed in MHz" ID="c1f66654-e0f0-4d0c-973a-29f30bba0c66" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Host Processor speed.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Host Processor speed.<br>
+		<br>
+		This is the clock speed of the physical processor backing the VM.  If this value fluxuates, it could be due to a couple issues:<br>
+		1.) vMotion of VM between hosts with different physical hardware.  Best practice for VMware vSphere clusters suggests maintaining hosts with identical hardare configurations to prevent unpredictable performance as VM's are vMotioned from host to host.  Identical host configuration may also help VMware vSphere Distributed Resource Scheduler recommend best placement for VM's.<br>
+		2.) Power Management settings - if your host is configured with active/dynamic power management in BIOS.  Consider setting a static 'High Performance' power management profile or disable power management in BIOS.  See this VMware KB for more info: <a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1018206">http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1018206</a>]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\VM Processor(*)\Host processor speed in MHz" COLLECTIONVARNAME="CollectionOfVMProcessorHostprocessorspeedinMHz" EXPRESSIONPATH="\VM Processor(*)\Host processor speed in MHz" TRENDVARNAME="TrendVMProcessorHostprocessorspeedinMHz" DATATYPE="integer" />
 		<CHART CHARTTITLE="\VM Processor(*)\Host processor speed in MHz" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Processor(*)\Host processor speed in MHz" CHARTLABELS="instance" />
 	</ANALYSIS>
 	<ANALYSIS NAME="Audio Bytes Received" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" ID="1c2de0da-9b2c-41ca-b974-5e8f4ef936dc" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Total number of audio bytes that have been received since the PCoIP session started.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Total number of audio bytes that have been received since the PCoIP session started.<br>
+		<br>
+		This value is incremental - it will continue to climb over the term of the PCoIP session.  Rapid climbing suggests a user is inputing audio - this may be dictation activity (medical or legal settings), WebEx sessions, etc.  Consider implementing a PCoIP Group Policy (<a href="http://www.vmware.com/files/pdf/view/VMware-View-5-PCoIP-Network-Optimization-Guide.pdf"><http://www.vmware.com/files/pdf/view/VMware-View-5-PCoIP-Network-Optimization-Guide.pdf</a>) with the 'Configure the PCoIP session audio bandwidth limit' setting enabled.  PCoIP Session Audio Bandwidth Limit will configure audio compression to control maximum audio bandwidth.<br>
+		The audio processing monitors the bandwidth used for audio. The processing selects the audio compression algorithm that provides the best audio possible, given the current bandwidth utilization. If a bandwidth limit is set, the processing reduces quality by changing the compression algorithm selection until the bandwidth limit is reached. If minimum quality audio cannot be provided within the bandwidth limit specified, audio is disabled.<br>
+		To allow for uncompressed high quality stereo audio, set this value to higher than 1600 kbit/s. A value of 450 kbit/s and higher allows for stereo, high-quality, compressed audio. A value between 50 kbit/s and 450 kbit/s results in audio that ranges between FM radio and phone call quality. A value below 50 kbit/s might result in no audio playback.<br>
+		This setting applies to View Agent only. You must enable audio on both endpoints before this setting has any effect.<br>
+		In addition, this setting has no effect on USB audio.<br>
+		If this setting is disabled or not configured, a default audio bandwidth limit of 500 kilobits per second is configured to constrain the audio compression algorithm selected. If the setting is configured, the value is measured in kilobits per second, with a default audio bandwidth limit of 500 kilobits per second.<br>
+		]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" COLLECTIONVARNAME="CollectionOfAudioBytesReceived" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" TRENDVARNAME="TrendOfAudioBytesReceived" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Received" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Audio Bytes Sent" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" ID="e2f7cd3e-1fef-4936-8297-644e4a29d335" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Total number of audio bytes that have been sent since the PCoIP session started.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Total number of audio bytes that have been sent since the PCoIP session started.<br>
+		<br>
+		This value is incremental - it will continue to climb over the term of the PCoIP session.  Rapid climbing suggests a user is streaming audio.  Consider implementing a PCoIP Group Policy (<a href="http://www.vmware.com/files/pdf/view/VMware-View-5-PCoIP-Network-Optimization-Guide.pdf"><http://www.vmware.com/files/pdf/view/VMware-View-5-PCoIP-Network-Optimization-Guide.pdf</a>) with the 'Configure the PCoIP session audio bandwidth limit' setting enabled.  PCoIP Session Audio Bandwidth Limit will configure audio compression to control maximum audio bandwidth.<br>
+		The audio processing monitors the bandwidth used for audio. The processing selects the audio compression algorithm that provides the best audio possible, given the current bandwidth utilization. If a bandwidth limit is set, the processing reduces quality by changing the compression algorithm selection until the bandwidth limit is reached. If minimum quality audio cannot be provided within the bandwidth limit specified, audio is disabled.<br>
+		To allow for uncompressed high quality stereo audio, set this value to higher than 1600 kbit/s. A value of 450 kbit/s and higher allows for stereo, high-quality, compressed audio. A value between 50 kbit/s and 450 kbit/s results in audio that ranges between FM radio and phone call quality. A value below 50 kbit/s might result in no audio playback.<br>
+		This setting applies to View Agent only. You must enable audio on both endpoints before this setting has any effect.<br>
+		In addition, this setting has no effect on USB audio.<br>
+		If this setting is disabled or not configured, a default audio bandwidth limit of 500 kilobits per second is configured to constrain the audio compression algorithm selected. If the setting is configured, the value is measured in kilobits per second, with a default audio bandwidth limit of 500 kilobits per second.<br>
+		]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" COLLECTIONVARNAME="CollectionOfAudioBytesSent" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" TRENDVARNAME="TrendOfAudioBytesSent" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio Bytes Sent" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Audio RX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" ID="bfd2b405-a627-48c3-820a-67a8812d8b75" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Bandwidth for ingoing audio packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Bandwidth for ingoing audio packets averaged over the sampling period (in seconds).  Throttle audio bandwidth using Group Policies if needed.  Size WAN links to accomodate PCoIP session bandwidth.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" COLLECTIONVARNAME="CollectionOfAudioRXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" TRENDVARNAME="TrendOfAudioRXBWkbit/sec" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio RX BW kbit/sec" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Audio TX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" ID="a1adb6ae-d850-45cc-a928-094928d33229" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Bandwidth for outgoing audio packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Bandwidth for outgoing audio packets averaged over the sampling period (in seconds).  Throttle audio bandwidth using Group Policies if needed.  Size WAN links to accomodate PCoIP session bandwidth.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" COLLECTIONVARNAME="CollectionOfAudioTXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" TRENDVARNAME="TrendOfAudioTXBWkbit/sec" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW kbit/sec" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Audio TX BW Limit kbit/sec" ENABLED="True" CATEGORY="PCoIP Session Audio" PRIMARYDATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" ID="3128a5a7-79d1-455a-a710-331c37a8009c" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Transmit bandwidth limit for outgoing audio packets as defined by the GPO setting.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Transmit bandwidth limit for outgoing audio packets as defined by the GPO setting.  If you have limited Audio bandwidth in the PCoIP Group Policy, the limit is shown here.  See this link for more info: <a href="http://pubs.vmware.com/view-51/topic/com.vmware.view.administration.doc/GUID-6C22A209-AFC1-47EF-9DFF-39AFB38D655D.html">http://pubs.vmware.com/view-51/topic/com.vmware.view.administration.doc/GUID-6C22A209-AFC1-47EF-9DFF-39AFB38D655D.html</a>]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" COLLECTIONVARNAME="CollectionOfAudioTXBWLimitkbit/sec" EXPRESSIONPATH="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" TRENDVARNAME="TrendOfAudioTXBWLimitkbit/sec" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Audio Statistics(PCoIP Session)\Audio TX BW Limit kbit/sec" CHARTLABELS="instance"/>
 	</ANALYSIS>
@@ -234,7 +259,7 @@
 		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\Packets Sent" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Packets Sent" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="General PCoIP RX Packets Lost" ENABLED="True" CATEGORY="PCoIP General" PRIMARYDATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" ID="d923aa66-b201-439c-a50a-8d1aa68d6a97" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Total number of receive packets that have been lost since the PCoIP session started.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Total number of receive packets that have been lost since the PCoIP session started.  PCoIP is a UDP based protocol and can tolerate some packet loss.  However, because PCoIP is dynamically able to control session, when packet loss is too high, PCoIP will throttle sessions (not just the one with packet loss) to improve the user experience.  See <a href="http://myvirtualcloud.net/?p=1537">http://myvirtualcloud.net/?p=1537</a> for more info.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" COLLECTIONVARNAME="CollectionOfGeneralPCoIPRXPacketsLost" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" TRENDVARNAME="TrendOfGeneralPCoIPRXPacketsLost" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\RX Packets Lost" CHARTLABELS="instance"/>
 	</ANALYSIS>
@@ -244,32 +269,32 @@
 		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\Session Duration Seconds" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\Session Duration Seconds" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="General PCoIP TX Packets Lost" ENABLED="True" CATEGORY="PCoIP General" PRIMARYDATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" ID="0bedeb74-17bc-402f-a612-27c3549ac76e" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Total number of transmit packets that have been lost since the PCoIP session started.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Total number of transmit packets that have been lost since the PCoIP session started.  PCoIP is a UDP based protocol and can tolerate some packet loss.  However, because PCoIP is dynamically able to control session, when packet loss is too high, PCoIP will throttle sessions (not just the one with packet loss) to improve the user experience.  See <a href="http://myvirtualcloud.net/?p=1537">http://myvirtualcloud.net/?p=1537</a> for more info.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" COLLECTIONVARNAME="CollectionOfGeneralPCoIPTXPacketsLost" EXPRESSIONPATH="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" TRENDVARNAME="TrendOfGeneralPCoIPTXPacketsLost" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session General Statistics(PCoIP Session)\TX Packets Lost" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Imaging Active Minimum Quality" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" ID="c0e123c4-5572-4c3d-9b8f-db83a551a709" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[The lowest encoded quality (0 to 100), updated every second. Not to be confused with the GPO setting.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[The lowest encoded quality (0 to 100), updated every second. Not to be confused with the GPO setting.  Lower minimum image quality will translate to a poorer user experience and a lossy display.  Lossy is bad for some settings, such as medial imaging.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" COLLECTIONVARNAME="CollectionOfImagingActiveMinimumQuality" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" TRENDVARNAME="TrendOfImagingActiveMinimumQuality" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Active Minimum Quality" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Imaging Bytes Received" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" ID="9f989f53-c9fb-4bdd-a491-a3dc14de2fd4" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Total number of imaging bytes that have been received since the PCoIP session started.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Total number of imaging bytes that have been received since the PCoIP session started.  This value is incremental - it will continue to climb over the term of the PCoIP session.  Rapid climbing suggests a user is using a web cam or other video input device.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" COLLECTIONVARNAME="CollectionOfImagingBytesReceived" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" TRENDVARNAME="TrendOfImagingBytesReceived" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Received" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Imaging Bytes Sent" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Sent" ID="f0745301-c751-4a62-adac-be94c90875a8" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Total number of imaging bytes that have been sent since the PCoIP session started.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Total number of imaging bytes that have been sent since the PCoIP session started.  This value is incremental - it will continue to climb over the term of the PCoIP session.  Rapid climbing suggests a user is streaming video.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Sent" COLLECTIONVARNAME="CollectionOfImagingBytesSent" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Sent" TRENDVARNAME="TrendOfImagingBytesSent" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Sent" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Bytes Sent" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Imaging Decoder Capability kbit/sec" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Decoder Capability kbit/sec" ID="d1be14d3-0f60-4d50-ba90-dbec117c3f3f" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[The current estimate of the decoder processing capability.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[The current estimate of the decoder processing capability.  This will show how well the client end-point is able to received the data that is being sent to it.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Decoder Capability kbit/sec" COLLECTIONVARNAME="CollectionOfImagingDecoderCapabilitykbit/sec" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Decoder Capability kbit/sec" TRENDVARNAME="TrendOfImagingDecoderCapabilitykbit/sec" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Decoder Capability kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Decoder Capability kbit/sec" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Imaging Encoded Frames/sec" ENABLED="True" CATEGORY="PCoIP Imaging" PRIMARYDATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Encoded Frames/sec" ID="971a1679-0eb8-43d4-aa52-9d2a63cdb673" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[The number of imaging frames which were encoded over a one second sampling period.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[The number of imaging frames which were encoded over a one second sampling period.  This can be controlled/throttled by using the 'PCoIP Image Quality Levels' Group Policy settings.]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Encoded Frames/sec" COLLECTIONVARNAME="CollectionOfImagingEncodedFrames/sec" EXPRESSIONPATH="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Encoded Frames/sec" TRENDVARNAME="TrendOfImagingEncodedFrames/sec" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Encoded Frames/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging Encoded Frames/sec" CHARTLABELS="instance"/>
 	</ANALYSIS>
@@ -284,7 +309,11 @@
 		<CHART CHARTTITLE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging TX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Imaging Statistics(PCoIP Session)\Imaging TX BW kbit/sec" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Network Round Trip Latency ms" ENABLED="True" CATEGORY="PCoIP Network" PRIMARYDATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\Round Trip Latency ms" ID="2661afae-acc5-4c56-9023-ab9ad26bf98c" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Round trip latency (in milliseconds) between server and client.]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Round trip latency (in milliseconds) between server and client.  PCoIP is capable of tolerating packet loss and latency as it is a UDP based protocol and able to dynamically manage itself.  Howerver, too much loss or latency will result in a poor user experience.<br>
+		Bandwidth requirements for PCoIP are defined here: <a href="http://pubs.vmware.com/view-51/index.jsp?topic=%2Fcom.vmware.view.planning.doc%2FGUID-5DC232B4-778B-4D9C-B995-B8850CF35096.html">http://pubs.vmware.com/view-51/index.jsp?topic=%2Fcom.vmware.view.planning.doc%2FGUID-5DC232B4-778B-4D9C-B995-B8850CF35096.html</a> and here: <a href="http://www.vmware.com/files/pdf/view/VMware-View-5-PCoIP-Network-Optimization-Guide.pdf">http://www.vmware.com/files/pdf/view/VMware-View-5-PCoIP-Network-Optimization-Guide.pdf</a><br>
+		With the reduced bandwidth consumption in View 5, adding 3D users is satisfactory on a WAN with up to approximately 100ms latency.<br>
+		Ensure that the round-trip network latency is less than 250 ms as a minimum.
+		]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session Network Statistics(PCoIP Session)\Round Trip Latency ms" COLLECTIONVARNAME="CollectionOfNetworkRoundTripLatencyms" EXPRESSIONPATH="\PCoIP Session Network Statistics(PCoIP Session)\Round Trip Latency ms" TRENDVARNAME="TrendOfNetworkRoundTripLatencyms" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session Network Statistics(PCoIP Session)\Round Trip Latency ms" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session Network Statistics(PCoIP Session)\Round Trip Latency ms" CHARTLABELS="instance"/>
 	</ANALYSIS>
@@ -334,12 +363,12 @@
 		<CHART CHARTTITLE="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Sent" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB Bytes Sent" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="USB RX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP USB" PRIMARYDATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB RX BW kbit/sec" ID="9ddcdc52-8535-422e-8a19-fd79adc5def1" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Bandwidth for incoming USB packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Bandwidth for incoming USB packets averaged over the sampling period (in seconds).  USB Bandwidth can spike if users are attaching USB Mass Storage Devices, USB Microphones, USB Web Cams, or USB CD/DVD readers/burners.  Consider controlling what USB devices users are allowed to connect to a View desktop via Group Polciy (Client or Agent policies -> USB Filtering) <a href="http://pubs.vmware.com/view-51/topic/com.vmware.view.administration.doc/GUID-C6E7AF06-1D9F-4096-8753-D6F6C7B58DB1.html#GUID-C6E7AF06-1D9F-4096-8753-D6F6C7B58DB1__TABLE_8F439159BE6344C0BFEED401A49AD9A6">http://pubs.vmware.com/view-51/topic/com.vmware.view.administration.doc/GUID-C6E7AF06-1D9F-4096-8753-D6F6C7B58DB1.html#GUID-C6E7AF06-1D9F-4096-8753-D6F6C7B58DB1__TABLE_8F439159BE6344C0BFEED401A49AD9A6</a>]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session USB Statistics(PCoIP Session)\USB RX BW kbit/sec" COLLECTIONVARNAME="CollectionOfUSBRXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session USB Statistics(PCoIP Session)\USB RX BW kbit/sec" TRENDVARNAME="TrendOfUSBRXBWkbit/sec" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session USB Statistics(PCoIP Session)\USB RX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB RX BW kbit/sec" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="USB TX BW kbit/sec" ENABLED="True" CATEGORY="PCoIP USB" PRIMARYDATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB TX BW kbit/sec" ID="3dcc0e0d-13c9-47ef-8529-99957af925ee" FROMALLCOUNTERSTATS="False">
-		<DESCRIPTION><![CDATA[Bandwidth for outgoing USB packets averaged over the sampling period (in seconds).]]></DESCRIPTION>
+		<DESCRIPTION><![CDATA[Bandwidth for outgoing USB packets averaged over the sampling period (in seconds).  USB Bandwidth can spike if users are attaching USB Mass Storage Devices, USB Microphones, USB Web Cams, or USB CD/DVD readers/burners.  Consider controlling what USB devices users are allowed to connect to a View desktop via Group Polciy (Client or Agent policies -> USB Filtering) <a href="http://pubs.vmware.com/view-51/topic/com.vmware.view.administration.doc/GUID-C6E7AF06-1D9F-4096-8753-D6F6C7B58DB1.html#GUID-C6E7AF06-1D9F-4096-8753-D6F6C7B58DB1__TABLE_8F439159BE6344C0BFEED401A49AD9A6">http://pubs.vmware.com/view-51/topic/com.vmware.view.administration.doc/GUID-C6E7AF06-1D9F-4096-8753-D6F6C7B58DB1.html#GUID-C6E7AF06-1D9F-4096-8753-D6F6C7B58DB1__TABLE_8F439159BE6344C0BFEED401A49AD9A6</a>]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\PCoIP Session USB Statistics(PCoIP Session)\USB TX BW kbit/sec" COLLECTIONVARNAME="CollectionOfUSBTXBWkbit/sec" EXPRESSIONPATH="\PCoIP Session USB Statistics(PCoIP Session)\USB TX BW kbit/sec" TRENDVARNAME="TrendOfUSBTXBWkbit/sec" DATATYPE="integer"/>
 		<CHART CHARTTITLE="\PCoIP Session USB Statistics(PCoIP Session)\USB TX BW kbit/sec" ISTHRESHOLDSADDED="False" DATASOURCE="\PCoIP Session USB Statistics(PCoIP Session)\USB TX BW kbit/sec" CHARTLABELS="instance"/>
 	</ANALYSIS>
