@@ -10,7 +10,7 @@
 		A large delta between memory active and vRAM allocated could indicate over-sized VM's.  Consider reducing memory allocation to VM's and monitor.
 		<b>See http://www.vmware.com/files/pdf/perf-vsphere-memory_management.pdf for information on how VMware manages memory!!!</b>]]></DESCRIPTION>
 		<DATASOURCE TYPE="CounterLog" NAME="\VM Memory\Memory Active in MB" COLLECTIONVARNAME="CollectionOfVMMemoryMemoryActiveinMB" EXPRESSIONPATH="\VM Memory\Memory Active in MB" TRENDVARNAME="TrendVMMemoryMemoryActiveinMB" DATATYPE="integer"/>
-		<CHART CHARTTITLE="\VM Memory\Memory Active in MB" ISTHRESHOLDSADDED="True" DATASOURCE="\VM Memory\Memory Active in MB" CHARTLABELS="instance"/>
+		<CHART CHARTTITLE="\VM Memory\Memory Active in MB" ISTHRESHOLDSADDED="False" DATASOURCE="\VM Memory\Memory Active in MB" CHARTLABELS="instance"/>
 	</ANALYSIS>
 	<ANALYSIS NAME="Memory Ballooned in MB" ENABLED="True" CATEGORY="VM Memory" PRIMARYDATASOURCE="\VM Memory\Memory Ballooned in MB" ID="0d0e9edc-06b4-4212-b024-f94ca285dbde" FROMALLCOUNTERSTATS="False">
 		<DESCRIPTION><![CDATA[The amount of memory that has been reclaimed from this virtual machine via the VMware Memory Balloon mechanism.<br>
